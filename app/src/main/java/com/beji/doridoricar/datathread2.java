@@ -9,9 +9,9 @@ import java.net.UnknownHostException;
 
 public class datathread2 extends AsyncTask<Void, Void, Void> {
 
-    String host;
-    int port;
-    String data = null;
+    private String host;
+    private int port;
+    private String data = null;
 
 
     datathread2(String host, int port, String data) {

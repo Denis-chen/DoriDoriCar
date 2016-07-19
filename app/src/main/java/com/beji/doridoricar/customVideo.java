@@ -34,10 +34,9 @@ public class customVideo implements OnPreparedListener,
             Log.e(TAG, "invalid video width(" + width + ") or height(" + height + ")");
             return;
         }
-        mIsVideoSizeKnown = true;
         mVideoWidth = width;
         mVideoHeight = height;
-        if (mIsVideoReadyToBePlayed && mIsVideoSizeKnown) {
+        if (mIsVideoReadyToBePlayed) {
             startVideoPlayback();
         }
 
@@ -46,8 +45,8 @@ public class customVideo implements OnPreparedListener,
     @Override
     public void onPrepared(MediaPlayer mp) {
         Log.d(TAG, "onPrepared called");
-        mIsVideoReadyToBePlayed = true;
-        if (mIsVideoReadyToBePlayed && mIsVideoSizeKnown) {
+
+        if (mIsVideoSizeKnown) {
             startVideoPlayback();
         }// TODO Auto-generated method stub
 

@@ -9,11 +9,14 @@ import java.net.UnknownHostException;
 
 public class datathread extends AsyncTask<Void, Void, Integer> {
 
-    String host;
-    int port;
-    String data = null;
-    int angleX = 90, angleY = 90;
-    byte[] out = new byte[5];
+    /**
+     *
+     */
+    private String host;
+    private int port;
+    private String data = null;
+    private int angleX = 90, angleY = 90;
+    private byte[] out = new byte[5];
 
     datathread(String host, int port, String data) {
         this.host = host;
@@ -32,7 +35,7 @@ public class datathread extends AsyncTask<Void, Void, Integer> {
     @Override
     protected Integer doInBackground(Void... arg0) {
         Socket socket = null;
-        while (isCancelled() != true) {
+        while (!isCancelled()) {
             try {
                 socket = new Socket(host, port);
                 System.out.println("client:" + host + ", " + port);

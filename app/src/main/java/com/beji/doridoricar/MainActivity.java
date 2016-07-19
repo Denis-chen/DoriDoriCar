@@ -13,10 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    RelativeLayout layout;
-    private ImageButton setbutton;
-    private ImageButton autobutton;
-    private ImageButton manualbutton;
+    private RelativeLayout layout;
     private String Recieveip = null;
     private int Recieveport = 0;
     private TextView text;
@@ -37,16 +34,16 @@ public class MainActivity extends Activity {
         layout = (RelativeLayout) findViewById(R.id.layout);
         //layout.setBackgroundResource(R.drawable.back);
 
-        setbutton = (ImageButton) findViewById(R.id.setbutton);
+        ImageButton setbutton = (ImageButton) findViewById(R.id.setbutton);
         setbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SetActiivity.class);
+                Intent intent = new Intent(MainActivity.this, SetActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
 
-        autobutton = (ImageButton) findViewById(R.id.autobutton);
+        ImageButton autobutton = (ImageButton) findViewById(R.id.autobutton);
         autobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +54,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        manualbutton = (ImageButton) findViewById(R.id.manualbutton);
+        ImageButton manualbutton = (ImageButton) findViewById(R.id.manualbutton);
         manualbutton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -89,9 +86,7 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 }

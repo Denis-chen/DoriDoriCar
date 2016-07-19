@@ -34,9 +34,9 @@ import io.vov.vitamio.LibsChecker;
 public class ManualActivity extends Activity implements SurfaceHolder.Callback {
 
     private static final String TAG = "MediaPlayerDemo";
-    SeekBar seekbar;
-    int angleX = 90, angleY = 90;
-    int V;
+    private SeekBar seekbar;
+    private int angleX = 90, angleY = 90;
+    private int V;
     private SurfaceView mPreview;
     private SurfaceHolder holder;
     //private String path = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";

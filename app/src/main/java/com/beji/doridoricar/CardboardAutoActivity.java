@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.Bundle;
@@ -14,6 +15,9 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.Surface;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
@@ -115,7 +119,7 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
             Sensor sensor = event.sensor;
             long actualTime = event.timestamp;
 
-            if (status == true) { //카메라
+            if (status) { //카메라
                 if (sensor.getType() == Sensor.TYPE_GYROSCOPE) { //카메라 x
                     int camleri = Math.round(event.values[0] * 10);
                     int input = -1;
@@ -169,6 +173,11 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
 
 
     }; //end sensorlistener
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,6 +230,9 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
         manager1.registerListener(MySensorListener, accl, SensorManager.SENSOR_DELAY_NORMAL);
         manager2.registerListener(MySensorListener, gyro, SensorManager.SENSOR_DELAY_NORMAL);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     } //end oncreate
 
     @Override
@@ -244,7 +256,7 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
 
         // 바퀴모드/카메라모드 전환
         status = !status;
-        if (status == true) {
+        if (status) {
             buttonthread = new datathread2(autoip, autoport, "s");
             buttonthread.execute();
             buttonthread = new datathread2(autoip, autoport, "d");
@@ -491,7 +503,7 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
     //error 확인
     private void checkGlError(String op) {
         int error;
-        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
+        if ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
             Log.e(TAG, op + ": glError " + error);
             throw new RuntimeException(op + ": glError " + error);
         }
@@ -526,4 +538,43 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "CardboardAuto Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.beji.doridoricar/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "CardboardAuto Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.beji.doridoricar/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
