@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Surface;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -95,8 +96,6 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
     private SurfaceTexture mSurface;
     private boolean updateSurface = false;
     //video size
-    private int mVideoWidth;
-    private int mVideoHeight;
     private boolean mIsVideoSizeKnown = false;
     private boolean mIsVideoReadyToBePlayed = false;
 
@@ -109,8 +108,8 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
     private Sensor accl;
 
     private datathread2 buttonthread;
-    private int autoport;
-    private String autoip;
+    private int autoport = 0;
+    private String autoip = null;
     private float lastUpdate;
     ///sensor listener
     SensorEventListener MySensorListener = new SensorEventListener() {
@@ -177,38 +176,8 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //vitamio library 확인
-        if (!LibsChecker.checkVitamioLibs(this))
-            return;
-
-        //context를 가진 mediaplayer 생성
-        mMediaPlayer = new MediaPlayer(this);
-
-        //cardboard view에 renderer 등록
-        setContentView(R.layout.common_ui);
-        CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
-        cardboardView.setRestoreGLStateEnabled(false);
-        cardboardView.setRenderer(this);
-        setCardboardView(cardboardView);
-
-        //정점들의 위치를 저장
-        mTriangleVertices = ByteBuffer.allocateDirect(
-                mTriangleVerticesData.length * FLOAT_SIZE_BYTES)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
-        mTriangleVertices.put(mTriangleVerticesData).position(0);
-
-        //매트릭스 생성
-        Matrix.setIdentityM(mSTMatrix, 0);
-
-        //overlap되어서 글자나 이미지를 띄우는 뷰 생성 & 3D 글자 toast
-        overlayView = (CardboardOverlayView) findViewById(R.id.overlay);
-        overlayView.show3DToast("Wait few minutes...streaming loading:)");
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         //부모 intent로 부터 server ip를 받아서 video path로 사용
         //"rtsp://220.67.128.179:8554/pi"  or "rtsp://192.168.42.1:8554/pi"
@@ -218,6 +187,13 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
             autoport = pre.getExtras().getInt("autoport");
         }
         path = "rtsp://" + autoip + ":8554/pi";
+
+        //vitamio library 확인
+        if (!LibsChecker.checkVitamioLibs(this))
+            return;
+
+        //context를 가진 mediaplayer 생성
+        mMediaPlayer = new MediaPlayer(this);
 
         //sensor
         manager1 = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -230,9 +206,33 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
         manager1.registerListener(MySensorListener, accl, SensorManager.SENSOR_DELAY_NORMAL);
         manager2.registerListener(MySensorListener, gyro, SensorManager.SENSOR_DELAY_NORMAL);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+        //정점들의 위치를 저장
+        mTriangleVertices = ByteBuffer.allocateDirect(
+                mTriangleVerticesData.length * FLOAT_SIZE_BYTES)
+                .order(ByteOrder.nativeOrder()).asFloatBuffer();
+        mTriangleVertices.put(mTriangleVerticesData).position(0);
+
+        //매트릭스 생성
+        Matrix.setIdentityM(mSTMatrix, 0);
+
+
+/*
+        //cardboard view에 renderer 등록
+        setContentView(R.layout.common_ui);
+       CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        cardboardView.setRestoreGLStateEnabled(false);
+        cardboardView.setRenderer(this);
+        setCardboardView(cardboardView);
+
+
+        //overlap되어서 글자나 이미지를 띄우는 뷰 생성 & 3D 글자 toast
+        overlayView = (CardboardOverlayView) findViewById(R.id.overlay);
+        overlayView.show3DToast("Wait few minutes...streaming loading:)");
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+*/
     } //end oncreate
 
     @Override
@@ -389,8 +389,6 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
             return;
         }
         mIsVideoSizeKnown = true;
-        mVideoWidth = width;
-        mVideoHeight = height;
         if (mIsVideoReadyToBePlayed && mIsVideoSizeKnown) {
             startVideoPlayback(mp);
         }
@@ -537,44 +535,4 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
         Log.i(TAG, "onRendererShutdown ");
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "CardboardAuto Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.beji.doridoricar/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "CardboardAuto Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.beji.doridoricar/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }
 }

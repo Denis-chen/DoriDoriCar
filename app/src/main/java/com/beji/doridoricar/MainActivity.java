@@ -2,6 +2,7 @@ package com.beji.doridoricar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +12,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 public class MainActivity extends Activity {
 
     private RelativeLayout layout;
     private String Recieveip = null;
     private int Recieveport = 0;
     private TextView text;
+    private BackPressCloseSystem backPressCloseSystem;
 
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -30,6 +36,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        backPressCloseSystem = new BackPressCloseSystem(this);
 
         layout = (RelativeLayout) findViewById(R.id.layout);
         //layout.setBackgroundResource(R.drawable.back);
@@ -39,7 +46,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SetActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 10);
             }
         });
 
@@ -69,7 +76,6 @@ public class MainActivity extends Activity {
                 // TODO Auto-generated method stub
             }
         });
-
     }
 
 
@@ -89,4 +95,10 @@ public class MainActivity extends Activity {
 
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseSystem.onBackPressed();
+    }
+
 }

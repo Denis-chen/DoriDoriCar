@@ -41,11 +41,11 @@ public class SetActivity extends Activity {
                 Piip = connectip.getText().toString();
                 Piport = Integer.parseInt(connectport.getText().toString());
 
-
                 Intent pre = getIntent();
                 pre.putExtra("ip", Piip);
                 pre.putExtra("Piport", Piport);
-                setResult(1, pre);
+                //RESULT_OK==-1, RESULT_FIRST_USEr==1, RESULT_CANCELED==0
+                setResult(RESULT_OK, pre);
 
                 //연결 확인 thread 시작
                 ConnectThread my = new ConnectThread(Piip, Piport);
@@ -57,7 +57,10 @@ public class SetActivity extends Activity {
     }
 
     public void onBackPressed() {
-        finish();
+        //finish();
+        Intent pre = getIntent();
+        //RESULT_OK==-1, RESULT_FIRST_USEr==1, RESULT_CANCELED==0
+        setResult(RESULT_CANCELED, pre);
         super.onBackPressed();
     }
 
