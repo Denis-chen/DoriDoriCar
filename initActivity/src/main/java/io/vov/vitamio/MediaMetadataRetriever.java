@@ -204,6 +204,7 @@ public class MediaMetadataRetriever {
 
     private AssetFileDescriptor mFD = null;
     private int mNativeContext;
+
     public MediaMetadataRetriever(Context ctx) {
         native_setup();
     }

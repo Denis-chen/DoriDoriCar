@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffaf35"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:id="@+id/face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Face"
+            android:src="@drawable/face" />
+
+        <ImageView
+            android:id="@+id/eye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="Eye"
+            android:src="@drawable/eye" />
+
+        <ImageView
+            android:id="@+id/mouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="MOUSE"
+            android:src="@drawable/mouse" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:id="@+id/car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="CAR"
+            android:src="@drawable/car" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:columnCount="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:weightSum="1">>
+
+        <ImageButton
+            android:id="@+id/autobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="CARDBOARD MODE"
+            android:src="@drawable/ic_action_cardboard"
+            android:text="자동"
+            android:layout_marginLeft="15dp"/>
+
+        <ImageButton
+            android:id="@+id/manualbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="MANUAL MODE"
+            android:src="@drawable/ic_action_hands"
+            android:text="수동"
+            android:layout_marginLeft="15dp"/>
+
+        <ImageButton
+            android:id="@+id/setbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="SETTING"
+            android:src="@drawable/ic_action_settings"
+            android:text="세팅"
+            android:layout_marginLeft="15dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

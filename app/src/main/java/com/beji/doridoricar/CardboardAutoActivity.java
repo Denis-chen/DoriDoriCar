@@ -7,18 +7,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Surface;
-import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.vrtoolkit.cardboard.CardboardActivity;
 import com.google.vrtoolkit.cardboard.CardboardView;
 import com.google.vrtoolkit.cardboard.Eye;
@@ -172,6 +167,7 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
 
 
     }; //end sensorlistener
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -205,7 +201,6 @@ public class CardboardAutoActivity extends CardboardActivity implements Cardboar
 
         manager1.registerListener(MySensorListener, accl, SensorManager.SENSOR_DELAY_NORMAL);
         manager2.registerListener(MySensorListener, gyro, SensorManager.SENSOR_DELAY_NORMAL);
-
 
 
         //정점들의 위치를 저장

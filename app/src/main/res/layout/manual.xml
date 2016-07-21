@@ -1,166 +1,200 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/AbsoluteLayout1"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffa4c8"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.beji.doridoricar.MainActivity">
+    android:weightSum="1">
 
     <SurfaceView
         android:id="@+id/surface1"
-        android:layout_width="349dp"
-        android:layout_height="205dp"
-        android:layout_marginStart="-11dp"
-        android:layout_marginTop="14dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
-
-    <GridLayout
-        android:layout_width="140dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="350dp"
-        android:columnCount="4"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <Button
-            android:id="@+id/downbtn"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_row="0"
-            android:text="▽" />
-
-        <Button
-            android:id="@+id/upbtn"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_row="0"
-            android:state_pressed="true"
-            android:text="△" />
-
-        <Button
-            android:id="@+id/leftbtn"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="start|center_vertical"
-            android:layout_row="0"
-            android:text="◁" />
-
-        <Button
-            android:id="@+id/rightbtn"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="end|center_vertical"
-            android:layout_row="0"
-            android:text="▷" />
-
-        <Button
-            android:id="@+id/stop"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="44dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="center"
-            android:layout_row="0"
-            android:text="◎" />
-
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="140dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="350dp"
-        android:columnCount="4"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <Button
-            android:id="@+id/cbtndown"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_row="0"
-            android:text="▼" />
-
-        <Button
-            android:id="@+id/cbtnup"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_row="0"
-            android:clickable="true"
-            android:text="▲" />
-
-        <Button
-            android:id="@+id/cbtnleft"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="start|center_vertical"
-            android:layout_row="0"
-            android:text="◀" />
-
-        <Button
-            android:id="@+id/cbtnright"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_gravity="end|center_vertical"
-            android:layout_row="0"
-            android:text="▶" />
-    </GridLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.5" />
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="240dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.03" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="290dp"
-        android:text="Camera"
-        android:textSize="30sp"
-        android:typeface="monospace"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="240dp"
-        android:layout_marginTop="290dp"
-        android:text="Car"
-        android:textSize="30sp"
-        android:typeface="monospace"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Camera"
+                android:textColor="#5882FA"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Car"
+                android:textColor="#F7D358"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.37"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+        <GridLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="#A9D0F5"
+            android:columnCount="1">
+
+            <Button
+                android:id="@+id/downbtn"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_row="0"
+                android:text="▽" />
+
+            <Button
+                android:id="@+id/upbtn"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_row="0"
+                android:state_pressed="true"
+                android:text="△" />
+
+            <Button
+                android:id="@+id/leftbtn"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="start|center_vertical"
+                android:layout_row="0"
+                android:text="◁" />
+
+            <Button
+                android:id="@+id/rightbtn"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="end|center_vertical"
+                android:layout_row="0"
+                android:text="▷" />
+
+            <Button
+                android:id="@+id/stop"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center"
+                android:layout_row="0"
+                android:text="◎" />
+
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0.5"
+            android:background="#F3F781"
+            android:columnCount="1">
+
+            <Button
+                android:id="@+id/cbtndown"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_row="0"
+                android:text="▼" />
+
+            <Button
+                android:id="@+id/cbtnup"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_row="0"
+                android:text="▲" />
+
+            <Button
+                android:id="@+id/cbtnleft"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="start|center_vertical"
+                android:layout_row="0"
+                android:text="◀" />
+
+            <Button
+                android:id="@+id/cbtnright"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="end|center_vertical"
+                android:layout_row="0"
+                android:text="▶" />
+
+        </GridLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
