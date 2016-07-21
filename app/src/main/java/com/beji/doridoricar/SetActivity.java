@@ -58,11 +58,10 @@ public class SetActivity extends Activity {
             pre.putExtra("Piport", Piport);
             //RESULT_OK==-1, RESULT_FIRST_USEr==1, RESULT_CANCELED==0
             setResult(RESULT_OK, pre);
-
             //연결 확인 thread 시작
             ConnectThread my = new ConnectThread(Piip, Piport);
             my.execute();
-            autoConnect.setChecked(true);
+
         }
 
 
@@ -103,6 +102,9 @@ public class SetActivity extends Activity {
                     editor.remove("port");
                     editor.remove("remember");
                     editor.commit();
+                } else {
+                    editor.remove("remember");
+                    editor.commit();
                 }
             }
         });
@@ -118,10 +120,12 @@ public class SetActivity extends Activity {
                     editor.putInt("port", PORT);
                     editor.putBoolean("autoConnect", true);
                     editor.commit();
-
                 } else if (pref.getBoolean("remember", false)) {
                     editor.remove("ip");
                     editor.remove("port");
+                    editor.remove("autoConnect");
+                    editor.commit();
+                } else {
                     editor.remove("autoConnect");
                     editor.commit();
                 }
@@ -129,7 +133,6 @@ public class SetActivity extends Activity {
         });
 
     }
-
 
     private void failed_connection() {
         editor.remove("autoConnect");
@@ -191,9 +194,10 @@ public class SetActivity extends Activity {
         }
 
         protected void onPostExecute(String result) {
-            if (result.contains("good"))
+            if (result.contains("good")) {
                 Toast.makeText(SetActivity.this, "Connection Sucess!", Toast.LENGTH_LONG).show();
-            else {
+                autoConnect.setChecked(true);
+            } else {
                 Toast.makeText(SetActivity.this, "Connection failed!", Toast.LENGTH_LONG).show();
                 failed_connection();
             }
